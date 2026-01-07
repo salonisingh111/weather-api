@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather api</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="main">
+
+    <div class="search-box">
+      <input type="text" id="input" placeholder="Write your city name">
+      <button id="searchBtn">Search</button>
+    </div>
+
+    <div id="para"></div>
+    <p id="msg"></p>
+  </div>
+</body>
+
+<script>
+  let input = document.getElementById("input");
+  let btn = document.getElementById("searchBtn");
+  let para = document.getElementById("para")
+  let msg = document.getElementById("msg");
+
+  input.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      btn.click();
+    }
+  })
+
+  btn.addEventListener("click", async function getWeather() {
+    let city = input.value.trim();
+
+    if (city === "") {
+      msg.innerText = "Please enter city name";
+      para.innerText = "";
+      return;
+    }
+
+    msg.innerText = "Loading...";
+    para.innerText = "";
+
+    try {
+      let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=7a057afb1e97d8859394c7ddf70d9046`);
+
+      let data = await response.json();
+
+      if (data.cod !== 200) {
+        msg.innerText = "city is not found";
+        para.innerText = "";
+        return;
+      }
+
+      let cityName = data.name;
+      let tempKelvin = data.main.temp;
+      let tempCelsius = (tempKelvin - 273.15).toFixed(1);
+      let description = data.weather[0].description;
+      let humidity = data.main.humidity;
+      let windSpeed = data.wind.speed;
+
+      para.innerHTML = `
+  <strong>${cityName}</strong><br>
+  Temperature: ${tempCelsius} °C<br>
+  Weather: ${description}<br>
+  Humidity: ${humidity}%
+`;
+      msg.innerText = "";
+
+    }
+    catch (error) {
+      console.error(error);
+      msg.innerText = "Network error. Check console.";
+      para.innerText = "";
+    }
+  });
+
+</script>
+
+</html>

@@ -1,0 +1,129 @@
+/* ========= RESET ========= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ========= PAGE BACKGROUND (NO GRADIENT) ========= */
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* solid, clean background */
+  background-color: #a7c3e5;
+}
+
+/* ========= MAIN CARD ========= */
+.main {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  transform: translateY(-60px);
+  animation: fadeUp 0.6s ease;
+}
+
+/* ========= SEARCH ROW ========= */
+.search-box {
+  display: flex;
+  gap: 10px;
+}
+
+/* ========= INPUT ========= */
+#input {
+  flex: 1;
+  padding: 14px 16px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  outline: none;
+  transition: border 0.25s, box-shadow 0.25s;
+}
+
+#input::placeholder {
+  color: #9ca3af;
+}
+
+#input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* ========= BUTTON ========= */
+#searchBtn {
+  padding: 0 18px;
+  font-size: 15px;
+  border: none;
+  border-radius: 12px;
+  background: #2563eb;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+#searchBtn:hover {
+  background: #1e40af;
+  box-shadow: 0 8px 18px rgba(30, 64, 175, 0.25);
+  transform: translateY(-1px);
+}
+
+#searchBtn:active {
+  transform: scale(0.97);
+}
+
+/* ========= RESULT ========= */
+#para {
+  margin-top: 22px;
+  padding: 16px;
+  border-radius: 14px;
+  background: #f9fafb;
+  min-height: 80px;
+  color: #111827;
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+/* ========= MESSAGE / ERROR ========= */
+#msg {
+  margin-top: 12px;
+  font-size: 14px;
+  text-align: center;
+  color: #dc2626;
+}
+
+/* ========= ANIMATIONS ========= */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-60px);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ========= MOBILE ========= */
+@media (max-width: 480px) {
+  .main {
+    padding: 22px;
+  }
+
+  #searchBtn {
+    padding: 0 14px;
+  }
+}
